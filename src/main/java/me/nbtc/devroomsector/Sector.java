@@ -4,20 +4,16 @@ import com.google.gson.Gson;
 import io.github.mqzen.menus.Lotus;
 import lombok.Getter;
 import me.nbtc.devroomsector.commands.region.RegionCommand;
-import me.nbtc.devroomsector.listeners.ChatListener;
+import me.nbtc.devroomsector.conversations.RegionConversation;
 import me.nbtc.devroomsector.listeners.MainListeners;
 import me.nbtc.devroomsector.manager.MenuManager;
 import me.nbtc.devroomsector.manager.WandManager;
 import me.nbtc.devroomsector.manager.flag.FlagManager;
-import me.nbtc.devroomsector.manager.flag.flags.BlockBreakFlag;
 import me.nbtc.devroomsector.manager.mysql.MySQLManager;
 import me.nbtc.devroomsector.pools.RegionPool;
 import me.nbtc.devroomsector.utils.config.SimpleConfig;
-import org.bukkit.command.SimpleCommandMap;
 import org.bukkit.event.EventPriority;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.lang.reflect.Field;
 
 @Getter
 public final class Sector extends JavaPlugin {
@@ -31,6 +27,8 @@ public final class Sector extends JavaPlugin {
     private SimpleConfig settings;
     private MySQLManager mySQLManager;
     private final Gson gson = new Gson();
+
+    private RegionConversation chatConversation;
 
     @Override
     public void onEnable() {
@@ -58,9 +56,11 @@ public final class Sector extends JavaPlugin {
         mySQLManager = new MySQLManager();
         mySQLManager.connect();
         regionPool.loadFromDatabase();
-
+        
         enrollCommands();
         enrollListeners();
+
+        chatConversation = new RegionConversation();
     }
     private void enrollCommands() {
         getCommand("region").setExecutor(new RegionCommand());
@@ -68,6 +68,5 @@ public final class Sector extends JavaPlugin {
     }
     private void enrollListeners(){
         getServer().getPluginManager().registerEvents(new MainListeners(), this);
-        getServer().getPluginManager().registerEvents(new ChatListener(), this);
     }
 }

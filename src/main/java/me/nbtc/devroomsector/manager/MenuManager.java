@@ -53,8 +53,9 @@ public class MenuManager {
         if (editType != EditType.NAME)
             value = "player name";
 
+
         player.closeInventory();
-        TextUtil.sendMsg(player, "&aPlease write the "+value+" in chat, &awrite &cCancel&a to cancel.");
+        Sector.getInstance().getChatConversation().startConversation(player, "&aPlease write the "+value+" in chat, &awrite &cCancel&a to cancel.");
     }
     public void handleRegionLocationRedefine(Player player, Region region){
         Wand playerWand = Sector.getInstance().getWandManager().getWand(player);
