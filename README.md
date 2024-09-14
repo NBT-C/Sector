@@ -53,4 +53,6 @@ public class BlockBreakFlag extends RegionFlag<BlockBreakEvent> {
 ```
 <p align="center">✌ Don't forget to register the flag in the Main class:</p>
 
-    Sector.getInstance().getFlagManager().registerFlag(new BlockBreakFlag());
+```java
+ Sector.getInstance().getFlagManager().registerFlag(new BlockBreakFlag());
+```
