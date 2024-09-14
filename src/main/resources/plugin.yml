@@ -1,0 +1,6 @@
+name: DevRoom-Sector
+version: '${project.version}'
+main: me.nbtc.devroomsector.Sector
+api-version: '1.20'
+commands:
+  region:
