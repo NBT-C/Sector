@@ -1,6 +1,0 @@
-MySQL:
-  Database: "test"
-  Host: "localhost"
-  Password: ""
-  Username: "root"
-  PoolSize: 3
